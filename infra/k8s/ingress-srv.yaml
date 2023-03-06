@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    -host: helpget.net
+      http:
+        paths:
+          -path: /api/enitity/?(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: entity-srv
+              prot:
+                number: 3000
+    -host: localhost
+      http:
+        paths:
+          -path: /api/enitity/?(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: entity-srv
+              prot:
+                number: 3000

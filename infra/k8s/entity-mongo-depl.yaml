@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: entity-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      app: entity-mongo
+  template:
+    metadata:
+      labels:
+        app: entity-mongo
+    spec:
+      containers:
+        -name: entity-mongo
+        impage: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: entity-mongo-srv
+spec:
+  selector:
+    app: entity-mongo
+  ports:
+    -name: entity-mongo-db
+    protocol: TCP
+    port: 27017
+    target: 27017

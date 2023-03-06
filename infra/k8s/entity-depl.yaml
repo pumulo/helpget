@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: entity-depl
+spec:
+  replicas: 1
+  selector:
+    matchlabels:
+      app: entity
+  template:
+    metadata:
+      labels:
+        app: entity
+    spec:
+      containers:
+        -name: entity
+        impage: pumulo/enity
+        env:
+          -name: MONGO_URI
+          value: 'mongodb://entity-mongo-srv:27017/entiry'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: entity-srv
+spec:
+  selector:
+    app: entity
+  ports:
+    -name: entity
+    port: 3000
+    target: 3000
