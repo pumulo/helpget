@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: entity-mongo
   template:
     metadata:
@@ -13,8 +13,8 @@ spec:
         app: entity-mongo
     spec:
       containers:
-        -name: entity-mongo
-        impage: mongo
+        - name: entity-mongo
+          image: mongo
 ---
 apiVersion: v1
 kind: Service
@@ -24,7 +24,7 @@ spec:
   selector:
     app: entity-mongo
   ports:
-    -name: entity-mongo-db
-    protocol: TCP
-    port: 27017
-    target: 27017
+    - name: entity-mongo-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

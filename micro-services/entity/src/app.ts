@@ -1,0 +1,27 @@
+import express from 'express';
+import 'express-async-errors';
+import { json } from 'body-parser';
+import cookieSession from 'cookie-session';
+import { aboutRouter, createRouter, queryRouter } from './routes';
+
+const app = express();
+app.set('trust proxy', true);
+app.use(json());
+app.use(
+    cookieSession(
+        {
+            signed: false
+        }
+    )
+)
+
+// TODO add all the routes that we define here
+app.use(aboutRouter);
+app.use(createRouter);
+app.use(queryRouter);
+
+app.all('*', () => {
+    throw new Error('Unable to reach this url. no functionality has been defined');
+});
+
+export { app };

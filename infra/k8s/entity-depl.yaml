@@ -5,7 +5,7 @@ metadata:
 spec:
   replicas: 1
   selector:
-    matchlabels:
+    matchLabels:
       app: entity
   template:
     metadata:
@@ -13,11 +13,11 @@ spec:
         app: entity
     spec:
       containers:
-        -name: entity
-        impage: pumulo/enity
-        env:
-          -name: MONGO_URI
-          value: 'mongodb://entity-mongo-srv:27017/entiry'
+        - name: entity
+          image: pumulo/entity
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://entity-mongo-srv:27017/entity'
 ---
 apiVersion: v1
 kind: Service
@@ -27,6 +27,7 @@ spec:
   selector:
     app: entity
   ports:
-    -name: entity
-    port: 3000
-    target: 3000
+    - name: entity
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

@@ -7,23 +7,23 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    -host: helpget.net
+    - host: helpget.local
       http:
         paths:
-          -path: /api/enitity/?(.*)
-          pathType: Prefix
-          backend:
-            service:
+          - path: /api/entity/?(.*)
+            pathType: Prefix
+            backend:
+             service:
               name: entity-srv
-              prot:
+              port:
                 number: 3000
-    -host: localhost
+    - host: helpget.net
       http:
         paths:
-          -path: /api/enitity/?(.*)
-          pathType: Prefix
-          backend:
-            service:
+          - path: /api/entity/?(.*)
+            pathType: Prefix
+            backend:
+             service:
               name: entity-srv
-              prot:
+              port:
                 number: 3000

@@ -1,0 +1,20 @@
+{
+    "type": "Person",
+    "description": "This is a person entity",
+    "values": {
+        "name": "Pumulo Sikaneta",
+        "dateOfBirth": "January 20th, 1977",
+        "citizenship": [
+            {
+                "country": "USA"
+            },
+            {
+                "country": "Canada"
+            }
+        ],
+        "sex": "Male",
+        "height": "6'",
+        "weight": "185 lbs"
+    },
+    "status": "create-source-postman"
+}

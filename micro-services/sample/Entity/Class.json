@@ -1,0 +1,28 @@
+{
+    "type": "Class",
+    "description": "This is a class entity",
+    "values": {
+        "school": "Cleveland High School",
+        "subject": "English",
+        "level": "Grade 10 - advanced",
+        "teacher": "Ms. Webster",
+        "students": [
+            {
+                "name": "Kaya Sikaneta",
+                "age": 15,
+                "grade (%)": 95.5
+            },
+            {
+                "name": "Katniss Everdeen",
+                "age": 15,
+                "grade (%)": 87.4
+            },
+            {
+                "name": "Ferris Beuler",
+                "age": 16,
+                "grade (%)": 34.75
+            }
+        ]
+    },
+    "status": "create-source-postman"
+}
