@@ -7,7 +7,7 @@ router.get(
     `${baseUrl}about`,
     (req: Request, res: Response) => {
         const resp = `
-            <h1>Entity microservice!!!!</h1>
+            <h1>Entity microservice on www.get-it.solutions!!!!</h1>
             <p>
                 Creaed by <em>Pumulo Sikaneta</em>.</br>
                 Utilizes:
