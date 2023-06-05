@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: entity
-          image: pumulo/entity
+          image: registry.digitalocean.com/pumulo/entity
           env:
             - name: MONGO_URI
               value: 'mongodb://entity-mongo-srv:27017/entity'
