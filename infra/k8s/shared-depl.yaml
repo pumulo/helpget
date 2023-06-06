@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shared-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shared
+  template:
+    metadata:
+      labels:
+        app: shared
+    spec:
+      containers:
+        - name: shared
+          image: pumulo/shared
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://shared-mongo-srv:27017/shared'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shared-srv
+spec:
+  selector:
+    app: shared
+  ports:
+    - name: shared
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

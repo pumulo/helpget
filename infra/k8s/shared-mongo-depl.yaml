@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sahred-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shared-mongo
+  template:
+    metadata:
+      labels:
+        app: shared-mongo
+    spec:
+      containers:
+        - name: shared-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shared-mongo-srv
+spec:
+  selector:
+    app: shared-mongo
+  ports:
+    - name: shared-mongo-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
