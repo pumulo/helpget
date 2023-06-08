@@ -14,8 +14,8 @@ npm i to check for errors and correct if found
 git commit -a -m 'Entity microservice working'
 git push
 
-docker build -t pumulo/entity .
-docker push pumulo/entity
+docker build -t pumulo/<microservice-name> .
+docker push pumulo/<microservice-name>
 
 // then run 
 kubectl delete deployment --all

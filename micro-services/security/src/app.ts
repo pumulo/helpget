@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-import { aboutRouter, createRouter, queryRouter, updateRouter } from './routes';
+import { aboutRouter, createRouter, queryRouter } from './routes';
 
 const app = express();
 app.set('trust proxy', true);
@@ -19,7 +19,6 @@ app.use(
 app.use(aboutRouter);
 app.use(createRouter);
 app.use(queryRouter);
-app.use(updateRouter);
 
 app.all('*', () => {
     throw new Error('Unable to reach this url. no functionality has been defined');
