@@ -7,7 +7,7 @@ declare const validateRequest: (req: Request, res: Response, next: NextFunction)
 const router = express.Router();
 
 router.put(
-    `${baseUrl}create`,
+    `${baseUrl}update`,
     [
         body('description').trim().isLength(
                 {max: 2000}
@@ -20,7 +20,7 @@ router.put(
         
         // if we find an existing entity, update it
         if (id) {
-            const existingEntity = await Entity.findById({ id });
+            const existingEntity = await Entity.findById(id);
 
             if (existingEntity) {
                 existingEntity.values = values;
