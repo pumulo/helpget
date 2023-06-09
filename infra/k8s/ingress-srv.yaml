@@ -17,6 +17,16 @@ spec:
               name: entity-srv
               port:
                 number: 3000
+    - host: www.helpget.net.solutions
+      http:
+        paths:
+          - path: /api/entity/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: entity-srv
+              port:
+                number: 3000
     - host: www.get-it.solutions
       http:
         paths:
