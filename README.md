@@ -8,6 +8,7 @@ copy contents for entity into the folder and customize package.json to a suitabl
 npm i to check for errors and correct if found
 
 
+git add .
 git commit -a -m 'Entity microservice working'
 git push
 
