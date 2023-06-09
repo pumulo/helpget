@@ -37,5 +37,35 @@ router.post(
     }
 );
 
+router.post(
+    `${baseUrl}batch/json/create`,
+    async (req: Request, res: Response) => {
+        const { entities }: { entities: any[]} = req.body;
+
+        const addedEntities = [];
+        for (const nextEntity of entities) {
+            const { type, description, values, status } = nextEntity;
+            const existingEntity = await Entity.findOne({ values });
+
+            if (existingEntity) {
+                console.error(JSON.stringify(existingEntity));
+                throw new Error('You are attempting to create a duplicate Entity');
+            }
+            const entity = Entity.build({
+                type,
+                description,
+                values,
+                status
+            });
+            entity.save();
+            addedEntities.push(entity);
+        }
+        
+
+
+        res.status(201).send(addedEntities);
+    
+    }
+);
 
 export { router as createRouter };
