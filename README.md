@@ -1,8 +1,5 @@
 # helpget
 
-doctl token:
-dop_v1_43eb77e171e6bee4cb7bf46b004f67ec3932e626a15f0a6680d756c197121ca3
-
 // create a node.js repository
 create a folder
 switch to thet folder
