@@ -2,7 +2,7 @@ import express from 'express';
 import 'express-async-errors';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
-import { aboutRouter, createRouter, queryRouter, updateRouter } from './routes';
+import { aboutRouter, createRouter, deleteRouter, queryRouter, updateRouter } from './routes';
 
 const app = express();
 app.set('trust proxy', true);
@@ -18,6 +18,7 @@ app.use(
 // TODO add all the routes that we define here
 app.use(aboutRouter);
 app.use(createRouter);
+app.use(deleteRouter);
 app.use(queryRouter);
 app.use(updateRouter);
 
