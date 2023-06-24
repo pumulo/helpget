@@ -19,7 +19,7 @@ router.put(
         const { id, type, description, values, status } = req.body;
         
         // if we find an existing entity, update it
-        if (id) {
+        if (id && id !== 'New') {
             const existingEntity = await Entity.findById(id);
 
             console.log(JSON.stringify(existingEntity));
