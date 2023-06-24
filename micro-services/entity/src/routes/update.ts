@@ -19,7 +19,7 @@ router.put(
         const { id, type, description, values, status } = req.body;
         
         // if we find an existing entity, update it
-        if (id && id !== 'New') {
+        if (id && id != 'New') {
             const existingEntity = await Entity.findById(id);
 
             console.log(JSON.stringify(existingEntity));
@@ -27,22 +27,19 @@ router.put(
                 existingEntity.values = values;
                 existingEntity.save();
                 res.status(202).send(existingEntity);
-            } else {
-                res.status(500).send('Unable to update existing entity');
-                throw new Error('Unable to update existing entity');
             }
-        } else {
-            //otherwise create a new one
-            const entity = Entity.build({
-                type,
-                description,
-                values,
-                status
-            });
-            entity.save();
-
-            res.status(201).send(entity);
         }
+        //otherwise create a new one
+        const entity = Entity.build({
+            type,
+            description,
+            values,
+            status
+        });
+        entity.save();
+
+        res.status(201).send(entity);
+        
     }
 );
 
