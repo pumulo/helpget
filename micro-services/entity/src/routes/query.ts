@@ -18,11 +18,28 @@ router.get(
     async (req: Request, res: Response) => {
         // get entity by id
         const id = req.params.id;
+        if (id === "New") {
+            res.send("{}");
+        }
 
         const entity = await Entity.findById(id);
         res.send(entity);
     }
 );
+
+router.get(
+    `${baseUrl}query-by-parent-id/one-to-one/:parentId`,
+    async (req: Request, res: Response) => {
+        // get entity by id
+        const parentId = req.params.parentId;
+
+        const entity = await Entity.findOne({
+            'values.parentId': parentId
+        });
+        res.send(entity);
+    }
+);
+
 router.get(
     `${baseUrl}query-by-type/:type`,
     async (req: Request, res: Response) => {
