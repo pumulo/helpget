@@ -7,14 +7,14 @@ const start = async () => {
             process.env.MONGO_URI!,
             {}
         )
-        console.log('conneted to action mongo db');
+        console.log('conneted to decision mongo db');
     } catch (err) {
         console.error(err);
     }
 };
 
 app.listen(3000, () => {
-    console.log('action service listening on port 3000');
+    console.log('decision service listening on port 3000');
 });
 
 start();
