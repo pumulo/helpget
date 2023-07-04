@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: action-mongo-depl
+  name: decision-mongo-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: action-mongo
+      app: decision-mongo
   template:
     metadata:
       labels:
-        app: action-mongo
+        app: decision-mongo
     spec:
       containers:
-        - name: action-mongo
+        - name: decision-mongo
           image: mongo
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: action-mongo-srv
+  name: decision-mongo-srv
 spec:
   selector:
-    app: action-mongo
+    app: decision-mongo
   ports:
-    - name: action-mongo-db
+    - name: decision-mongo-db
       protocol: TCP
       port: 27017
       targetPort: 27017

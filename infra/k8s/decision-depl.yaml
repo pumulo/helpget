@@ -1,34 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: action-depl
+  name: decision-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: action
+      app: decision
   template:
     metadata:
       labels:
-        app: action
+        app: decision
     spec:
       containers:
-        - name: action
-          image: pumulo/action
+        - name: decision
+          image: pumulo/decision
           imagePullPolicy: Always
           env:
             - name: MONGO_URI
-              value: 'mongodb://action-mongo-srv:27017/action'
+              value: 'mongodb://decision-mongo-srv:27017/decision'
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: action-srv
+  name: decision-srv
 spec:
   selector:
-    app: action
+    app: decision
   ports:
-    - name: action
+    - name: decision
       protocol: TCP
       port: 3000
       targetPort: 3000
