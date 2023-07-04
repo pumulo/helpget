@@ -52,7 +52,8 @@ const DecisionSchema = new mongoose.Schema(
                 delete ret.__v;
             }
         }
-});
+    }
+);
 
 DecisionSchema.statics.build = (attrs: DecisionAttrs) => {
     return new Decision(attrs)

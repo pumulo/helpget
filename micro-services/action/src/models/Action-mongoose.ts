@@ -41,15 +41,19 @@ const ActionSchema = new mongoose.Schema(
             required: true,
             default: 'Pending'
         }
-    }, {
-    toJSON: {
-        transform(doc, ret) {
-            ret.id = ret._id;
-            delete ret._id;
-            delete ret.__v;
+    },
+    {
+        timestamps: true,
+        toJSON: {
+            transform(doc, ret) {
+                ret.id = ret._id;
+                delete ret._id;
+                ret.version = ret.__v;
+                delete ret.__v;
+            }
         }
     }
-});
+);
 
 ActionSchema.statics.build = (attrs: ActionAttrs) => {
     return new Action(attrs)

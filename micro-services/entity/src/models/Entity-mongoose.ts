@@ -41,15 +41,18 @@ const EntitySchema = new mongoose.Schema(
             required: true,
             default: 'Pending'
         }
-    }, {
-    toJSON: {
-        transform(doc, ret) {
-            ret.id = ret._id;
-            delete ret._id;
-            delete ret.__v;
+    },
+    {
+        timestamps: true,
+        toJSON: {
+            transform(doc, ret) {
+                ret.id = ret._id;
+                delete ret._id;
+                delete ret.__v;
+            }
         }
     }
-});
+);
 
 EntitySchema.statics.build = (attrs: EntityAttrs) => {
     return new Entity(attrs)
