@@ -4,7 +4,7 @@ import { app } from './app';
 const start = async () => {
     try {
         await mongoose.connect(
-            process.env.MONGO_URI!,
+            process.env.ACTION_MONGO_URI!,
             {}
         )
         console.log('conneted to action mongo db');

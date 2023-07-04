@@ -17,7 +17,7 @@ spec:
           image: pumulo/action
           imagePullPolicy: Always
           env:
-            - name: MONGO_URI
+            - name: ACTION_MONGO_URI
               value: 'mongodb://action-mongo-srv:27017/action'
 ---
 apiVersion: v1
