@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: party-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: party
+  template:
+    metadata:
+      labels:
+        app: party
+    spec:
+      containers:
+        - name: party
+          image: pumulo/party
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://party-mongo-srv:27017/party'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: party-srv
+spec:
+  selector:
+    app: party
+  ports:
+    - name: party
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

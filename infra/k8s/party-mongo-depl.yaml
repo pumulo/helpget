@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: party-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: party-mongo
+  template:
+    metadata:
+      labels:
+        app: party-mongo
+    spec:
+      containers:
+        - name: party-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: party-mongo-srv
+spec:
+  selector:
+    app: party-mongo
+  ports:
+    - name: party-mongo-db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017
