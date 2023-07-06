@@ -31,6 +31,13 @@ spec:
               name: decision-srv
               port:
                 number: 3000
+          - path: /api/party/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: party-srv
+              port:
+                number: 3000
     - host: www.helpget.net.solutions
       http:
         paths:
@@ -63,6 +70,13 @@ spec:
             backend:
              service:
               name: decision-srv
+              port:
+                number: 3000
+          - path: /api/party/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: party-srv
               port:
                 number: 3000
           - path: /api/shared/?(.*)
