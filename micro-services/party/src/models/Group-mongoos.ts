@@ -59,6 +59,6 @@ ActionSchema.statics.build = (attrs: ActionAttrs) => {
     return new Action(attrs)
 };
 
-const Action = mongoose.model<ActionDoc, ActionModel>('action', ActionSchema);
+const Action = mongoose.model<ActionDoc, ActionModel>('group', ActionSchema);
 
 export { Action };
