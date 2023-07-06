@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Action } from '../../models/Individual-mongoose';
+import { Action } from '../../models/Relationship-mongoose';
 import { relationshipUrl as baseUrl } from '../../config/end-points';
 
 const router = express.Router();

@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { body } from 'express-validator';
-import { Action } from '../../models/Individual-mongoose';
+import { Action } from '../../models/Relationship-mongoose';
 import { relationshipUrl as baseUrl } from '../../config/end-points';
 
 declare const validateRequest: (req: Request, res: Response, next: NextFunction) => void;

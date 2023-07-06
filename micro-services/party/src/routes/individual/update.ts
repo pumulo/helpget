@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { body } from 'express-validator';
-import { Action } from '../../models/Individual-mongoose';
+import { Individual } from '../../models/Individual-mongoose';
 import { individualUrl as baseUrl } from '../../config/end-points';
 
 declare const validateRequest: (req: Request, res: Response, next: NextFunction) => void;
@@ -9,43 +9,53 @@ const router = express.Router();
 router.put(
     `${baseUrl}update`,
     [
-        body('description').trim().isLength(
-                {max: 2000}
-        ).withMessage(
-            'The Action description cannot be longer than 2000 characters'),
+        body('firstName').notEmpty()
+            .withMessage('First Name is a required field'),
+        body('lastName').notEmpty()
+            .withMessage('Last Name is a required field'),
+        body('contactInfo').notEmpty()
+            .withMessage('Contact information is a required to create an individual'),
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
-        let { id, type, description, values, status } = req.body;
+        let { 
+            id,
+            firstName,
+            middleName,
+            lastName,
+            contactInfo,
+            description,
+            values,
+            status,
+        } = req.body;
         
-        // if we find an existing Action, update it
+        // if we find an existing Individual, update it
         if (id && id != 'New') {
-            const existingAction = await Action.findById(id);
+            const existingIndividual = await Individual.findById(id);
 
-            console.log(JSON.stringify(existingAction));
-            if (existingAction) {
-                existingAction.values = values;
-                existingAction.save();
-                res.status(202).send(existingAction);
+            console.log(JSON.stringify(existingIndividual));
+            if (existingIndividual) {
+                existingIndividual.values = values;
+                existingIndividual.save();
+                res.status(202).send(existingIndividual);
             }
         }
         //otherwise create a new one
         if (!status) {
             status = "New_UnknownStatus";
         }
-
-        if (!type) {
-            type = "Unknown";
-        }
-        const action = Action.build({
-            type,
+        const individual = Individual.build({ 
+            firstName,
+            middleName,
+            lastName,
+            contactInfo,
             description,
             values,
-            status
+            status,
         });
-        action.save();
+        individual.save();
 
-        res.status(201).send(action);
+        res.status(201).send(individual);
         
     }
 );
@@ -53,40 +63,54 @@ router.put(
 router.put(
     `${baseUrl}/:type/update`,
     [
-        body('description').trim().isLength(
-                {max: 2000}
-        ).withMessage(
-            'The action description cannot be longer than 2000 characters'),
+        body('firstName').notEmpty()
+            .withMessage('First Name is a required field'),
+        body('lastName').notEmpty()
+            .withMessage('Last Name is a required field'),
+        body('contactInfo').notEmpty()
+            .withMessage('Contact information is a required to create an individual'),
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
         const type = req.params.type;
-        let { id, description, values, status } = req.body;
+        let {
+            id,
+            firstName,
+            middleName,
+            lastName,
+            contactInfo,
+            description,
+            values,
+            status,
+        } = req.body;
         
         // if we find an existing entity, update it
         if (id && id != 'New') {
-            const existingAction = await Action.findById(id);
+            const existingIndividual = await Individual.findById(id);
 
-            console.log(JSON.stringify(existingAction));
-            if (existingAction) {
-                existingAction.values = values;
-                existingAction.save();
-                res.status(202).send(existingAction);
+            console.log(JSON.stringify(existingIndividual));
+            if (existingIndividual) {
+                existingIndividual.values = values;
+                existingIndividual.save();
+                res.status(202).send(existingIndividual);
             }
         }
         //otherwise create a new one
         if (!status) {
             status = "New_UnknownStatus";
         }
-        const action = Action.build({
-            type,
+        const individual = Individual.build({ 
+            firstName,
+            middleName,
+            lastName,
+            contactInfo,
             description,
             values,
-            status
+            status,
         });
-        action.save();
+        individual.save();
 
-        res.status(201).send(action);
+        res.status(201).send(individual);
         
     }
 );

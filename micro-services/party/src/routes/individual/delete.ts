@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Action } from '../../models/Individual-mongoose';
+import { Individual } from '../../models/Individual-mongoose';
 import { individualUrl as baseUrl } from '../../config/end-points';
 
 const router = express.Router();
@@ -7,11 +7,11 @@ const router = express.Router();
 router.delete(
     `${baseUrl}delete-by-id/:id`,
     async (req: Request, res: Response) => {
-        // get Action by id
+        // get Individual by id
         const id = req.params.id;
 
-        const action = await Action.findByIdAndDelete(id);
-        res.send(action);
+        const individual = await Individual.findByIdAndDelete(id);
+        res.send(individual);
     }
 );
 

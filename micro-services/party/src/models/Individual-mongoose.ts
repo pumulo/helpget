@@ -1,31 +1,50 @@
 import mongoose from "mongoose";
+import { ContactInfoAttrs, ContactInfoSchema } from "./ContactInfo-mongoose";
 
-// interface used to ddescribe the properties used to create a new Entity
-interface ActionAttrs {
-    type: string;
+// interface used to describe the properties used to create a new Individual
+interface IndividualAttrs {
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    contactInfo: ContactInfoAttrs;
     description: string;
     values: JSON;
     status: string;
 }
 
-// properties that an Action has
-interface ActionDoc extends mongoose.Document {
-    type: string;
+// properties that an Individual has
+interface IndividualDoc extends mongoose.Document {
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    contactInfo: ContactInfoAttrs;
     description: string;
     values: JSON;
     status: string;
 }
 
 // interface that describnes the properties tha the model has
-interface ActionModel extends mongoose.Model<ActionDoc> {
-    build(attrs: ActionAttrs): ActionDoc;
+interface IndividualModel extends mongoose.Model<IndividualDoc> {
+    build(attrs: IndividualAttrs): IndividualDoc;
 }
 
 // describe the schema stored in mongoose
-const ActionSchema = new mongoose.Schema(
+const IndividualSchema = new mongoose.Schema(
     {
-        type: {
+        firstName: {
             type: String,
+            required: true
+        },
+        middleName: {
+            type: String,
+            required: false
+        },
+        lastName: {
+            type: String,
+            required: true
+        },
+        contactInfo: {
+            type: ContactInfoSchema,
             required: true
         },
         description: {
@@ -55,10 +74,10 @@ const ActionSchema = new mongoose.Schema(
     }
 );
 
-ActionSchema.statics.build = (attrs: ActionAttrs) => {
-    return new Action(attrs)
+IndividualSchema.statics.build = (attrs: IndividualAttrs) => {
+    return new Individual(attrs)
 };
 
-const Action = mongoose.model<ActionDoc, ActionModel>('action', ActionSchema);
+const Individual = mongoose.model<IndividualDoc, IndividualModel>('individual', IndividualSchema);
 
-export { Action };
+export { Individual };
