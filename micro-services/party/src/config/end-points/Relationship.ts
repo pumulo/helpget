@@ -1,5 +1,5 @@
 import { baseUrl } from "../Base-Url";
 
-const relationshipUrl = baseUrl + '/relationship';
+const relationshipUrl = baseUrl + 'relationship/';
 
 export { relationshipUrl };

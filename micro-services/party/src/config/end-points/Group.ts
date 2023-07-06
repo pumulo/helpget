@@ -1,5 +1,5 @@
 import { baseUrl } from "../Base-Url";
 
-const groupUrl = baseUrl + '/group';
+const groupUrl = baseUrl + 'group/';
 
 export { groupUrl };
