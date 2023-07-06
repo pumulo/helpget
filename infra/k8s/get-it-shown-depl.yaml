@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: get-it-shown-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: get-it-shown
+  template:
+    metadata:
+      labels:
+        app: get-it-shown
+    spec:
+      containers:
+        - name: get-it-shown
+          image: pumulo/get-it-shown
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: get-it-shown-srv
+spec:
+  selector:
+    app: get-it-shown
+  ports:
+    - name: get-it-shown
+      port: 3000
+      targetPort: 3000

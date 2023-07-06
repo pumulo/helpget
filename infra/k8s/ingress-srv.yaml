@@ -7,6 +7,36 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
+    - host: do.get-it.solutions
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: get-it-done-srv
+                port: 
+                  number: 3000
+    - host: make.get-it.solutions
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: get-it-made-srv
+                port: 
+                  number: 3000
+    - host: show.get-it.solutions
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: get-it-shown-srv
+                port: 
+                  number: 3000
     - host: local.get-it.solutions
       http:
         paths:

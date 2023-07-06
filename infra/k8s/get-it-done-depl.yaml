@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: get-it-done-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: get-it-done
+  template:
+    metadata:
+      labels:
+        app: get-it-done
+    spec:
+      containers:
+        - name: get-it-done
+          image: pumulo/get-it-done
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: get-it-done-srv
+spec:
+  selector:
+    app: get-it-done
+  ports:
+    - name: get-it-done
+      port: 3000
+      targetPort: 3000

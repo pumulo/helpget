@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: get-it-made-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: get-it-made
+  template:
+    metadata:
+      labels:
+        app: get-it-made
+    spec:
+      containers:
+        - name: get-it-made
+          image: pumulo/get-it-made
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: get-it-made-srv
+spec:
+  selector:
+    app: get-it-made
+  ports:
+    - name: get-it-made
+      port: 3000
+      targetPort: 3000
