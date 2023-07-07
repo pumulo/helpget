@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: getit
+  annotations:
+    kubernetes.digitalocean.com/load-balancer-id: "get-it.solutions-balancer"
+    service.beta.kubernetes.io/do-loadbalancer-size-unit: "2"
+    service.beta.kubernetes.io/do-loadbalancer-disable-lets-encrypt-dns-records: "false"
+spec:
+  type: LoadBalancer
+  selector:
+    app: get-it.solutions
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
