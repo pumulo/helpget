@@ -7,75 +7,6 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: local.get-it.solutions
-      http:
-        paths:
-          - path: /entity/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: entity-srv
-              port:
-                number: 3000
-          - path: /api/action/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: action-srv
-              port:
-                number: 3000
-          - path: /api/decision/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: decision-srv
-              port:
-                number: 3000
-          - path: /api/party/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: party-srv
-              port:
-                number: 3000
-    - host: www.get-it.solutions
-      http:
-        paths:
-          - path: /entity/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: entity-srv
-              port:
-                number: 3000
-          - path: /api/action/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: action-srv
-              port:
-                number: 3000
-          - path: /api/decision/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: decision-srv
-              port:
-                number: 3000
-          - path: /api/party/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: party-srv
-              port:
-                number: 3000
-          - path: /api/shared/?(.*)
-            pathType: Prefix
-            backend:
-             service:
-              name: shared-srv
-              port:
-                number: 3000
     - host: api.get-it.solutions
       http:
         paths:
@@ -86,28 +17,28 @@ spec:
               name: entity-srv
               port:
                 number: 3000
-          - path: /api/action/?(.*)
+          - path: /action/?(.*)
             pathType: Prefix
             backend:
              service:
               name: action-srv
               port:
                 number: 3000
-          - path: /api/decision/?(.*)
+          - path: /decision/?(.*)
             pathType: Prefix
             backend:
              service:
               name: decision-srv
               port:
                 number: 3000
-          - path: /api/party/?(.*)
+          - path: /party/?(.*)
             pathType: Prefix
             backend:
              service:
               name: party-srv
               port:
                 number: 3000
-          - path: /api/shared/?(.*)
+          - path: /shared/?(.*)
             pathType: Prefix
             backend:
              service:
