@@ -76,7 +76,7 @@ spec:
               name: shared-srv
               port:
                 number: 3000
-    - host: iq.get-it.solutions
+    - host: api.get-it.solutions
       http:
         paths:
           - path: /api/entity/?(.*)
