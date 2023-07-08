@@ -76,16 +76,6 @@ spec:
               name: shared-srv
               port:
                 number: 3000
-    - host: do.get-it.solutions
-      http:
-        paths:
-          - path: /?(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: get-it-done-srv
-                port: 
-                  number: 3000
     - host: make.get-it.solutions
       http:
         paths:
@@ -94,15 +84,5 @@ spec:
             backend:
               service:
                 name: get-it-made-srv
-                port: 
-                  number: 3000
-    - host: show.get-it.solutions
-      http:
-        paths:
-          - path: /?(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: get-it-shown-srv
                 port: 
                   number: 3000
