@@ -1,3 +1,3 @@
-const baseUrl = '/api/action/';
+const baseUrl = '/action/';
 
 export { baseUrl };

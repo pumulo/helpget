@@ -10,7 +10,7 @@ spec:
     - host: local.get-it.solutions
       http:
         paths:
-          - path: /api/entity/?(.*)
+          - path: /entity/?(.*)
             pathType: Prefix
             backend:
              service:
@@ -41,7 +41,7 @@ spec:
     - host: www.get-it.solutions
       http:
         paths:
-          - path: /api/entity/?(.*)
+          - path: /entity/?(.*)
             pathType: Prefix
             backend:
              service:
@@ -79,7 +79,7 @@ spec:
     - host: api.get-it.solutions
       http:
         paths:
-          - path: /api/entity/?(.*)
+          - path: /entity/?(.*)
             pathType: Prefix
             backend:
              service:

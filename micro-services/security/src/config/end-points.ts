@@ -1,3 +1,3 @@
-const baseUrl = '/api/security/';
+const baseUrl = '/security/';
 
 export { baseUrl };

@@ -1,3 +1,3 @@
-const baseUrl = '/api/shared/';
+const baseUrl = '/shared/';
 
 export { baseUrl };
