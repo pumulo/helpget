@@ -76,6 +76,44 @@ spec:
               name: shared-srv
               port:
                 number: 3000
+    - host: iq.get-it.solutions
+      http:
+        paths:
+          - path: /api/entity/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: entity-srv
+              port:
+                number: 3000
+          - path: /api/action/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: action-srv
+              port:
+                number: 3000
+          - path: /api/decision/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: decision-srv
+              port:
+                number: 3000
+          - path: /api/party/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: party-srv
+              port:
+                number: 3000
+          - path: /api/shared/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: shared-srv
+              port:
+                number: 3000
     - host: do.get-it.solutions
       http:
         paths:
@@ -94,5 +132,15 @@ spec:
             backend:
               service:
                 name: get-it-made-srv
+                port: 
+                  number: 3000
+    - host: show.get-it.solutions
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: get-it-shown-srv
                 port: 
                   number: 3000
