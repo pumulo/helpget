@@ -3,8 +3,9 @@ kind: Ingress
 metadata:
   name: ingress-srv
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
+  ingressClassName: nginx
   rules:
     - host: local.get-it.solutions
       http:
@@ -75,3 +76,23 @@ spec:
               name: shared-srv
               port:
                 number: 3000
+    - host: do.get-it.solutions
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: get-it-done-srv
+                port: 
+                  number: 3000
+    - host: make.get-it.solutions
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: get-it-made-srv
+                port: 
+                  number: 3000
