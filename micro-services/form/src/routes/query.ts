@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { Entity } from '../models/Entity-mongoose';
+import { Form } from '../models/Form-mongoose';
 import { baseUrl } from '../config/end-points';
 
 const router = express.Router();
@@ -7,47 +7,47 @@ const router = express.Router();
 router.get(
     `${baseUrl}query`,
     async (req: Request, res: Response) => {
-        // get all entities in the db
-        const entities = await Entity.find();
-        res.send(entities);
+        // get all forms in the db
+        const forms = await Form.find();
+        res.send(forms);
     }
 );
 
 router.get(
     `${baseUrl}query-by-id/:id`,
     async (req: Request, res: Response) => {
-        // get entity by id
+        // get Form by id
         const id = req.params.id;
         if (id === "New") {
             res.send("{}");
         }
 
-        const entity = await Entity.findById(id);
-        res.send(entity);
+        const form = await Form.findById(id);
+        res.send(form);
     }
 );
 
 router.get(
     `${baseUrl}query-by-parent-id/one-to-one/:parentId`,
     async (req: Request, res: Response) => {
-        // get entity by id
+        // get Form by id
         const parentId = req.params.parentId;
 
-        const entity = await Entity.findOne({
+        const form = await Form.findOne({
             'values.parentId': parentId
         });
-        res.send(entity);
+        res.send(form);
     }
 );
 
 router.get(
     `${baseUrl}query-by-type/:type`,
     async (req: Request, res: Response) => {
-        // get entities by type
+        // get forms by type
         const type = req.params.type;
 
-        const entitiesByType = await Entity.find( { type });
-        res.send(entitiesByType);
+        const formsByType = await Form.find( { type });
+        res.send(formsByType);
     }
 );
 

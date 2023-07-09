@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 // interface used to ddescribe the properties used to create a new Entity
 interface ActionAttrs {
     type: string;
+    name: string;
     description: string;
     values: JSON;
     status: string;
@@ -11,6 +12,7 @@ interface ActionAttrs {
 // properties that an Action has
 interface ActionDoc extends mongoose.Document {
     type: string;
+    name: string;
     description: string;
     values: JSON;
     status: string;
@@ -25,6 +27,10 @@ interface ActionModel extends mongoose.Model<ActionDoc> {
 const ActionSchema = new mongoose.Schema(
     {
         type: {
+            type: String,
+            required: true
+        },
+        name: {
             type: String,
             required: true
         },

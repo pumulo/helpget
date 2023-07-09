@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { body } from 'express-validator';
-import { Entity } from '../models/Entity-mongoose';
+import { Form } from '../models/Form-mongoose';
 import { baseUrl } from '../config/end-points';
 
 declare const validateRequest: (req: Request, res: Response, next: NextFunction) => void;
@@ -12,21 +12,21 @@ router.put(
         body('description').trim().isLength(
                 {max: 2000}
         ).withMessage(
-            'The Entity description cannot be longer than 2000 characters'),
+            'The Form description cannot be longer than 2000 characters'),
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
         let { id, type, description, values, status } = req.body;
         
-        // if we find an existing entity, update it
+        // if we find an existing Form, update it
         if (id && id != 'New') {
-            const existingEntity = await Entity.findById(id);
+            const existingForm = await Form.findById(id);
 
-            console.log(JSON.stringify(existingEntity));
-            if (existingEntity) {
-                existingEntity.values = values;
-                existingEntity.save();
-                res.status(202).send(existingEntity);
+            console.log(JSON.stringify(existingForm));
+            if (existingForm) {
+                existingForm.values = values;
+                existingForm.save();
+                res.status(202).send(existingForm);
             }
         }
         //otherwise create a new one
@@ -37,15 +37,15 @@ router.put(
         if (!type) {
             type = "Unknown";
         }
-        const entity = Entity.build({
+        const form = Form.build({
             type,
             description,
             values,
             status
         });
-        entity.save();
+        form.save();
 
-        res.status(201).send(entity);
+        res.status(201).send(form);
         
     }
 );
@@ -56,37 +56,37 @@ router.put(
         body('description').trim().isLength(
                 {max: 2000}
         ).withMessage(
-            'The Entity description cannot be longer than 2000 characters'),
+            'The Form description cannot be longer than 2000 characters'),
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
         const type = req.params.type;
         let { id, description, values, status } = req.body;
         
-        // if we find an existing entity, update it
+        // if we find an existing Form, update it
         if (id && id != 'New') {
-            const existingEntity = await Entity.findById(id);
+            const existingForm = await Form.findById(id);
 
-            console.log(JSON.stringify(existingEntity));
-            if (existingEntity) {
-                existingEntity.values = values;
-                existingEntity.save();
-                res.status(202).send(existingEntity);
+            console.log(JSON.stringify(existingForm));
+            if (existingForm) {
+                existingForm.values = values;
+                existingForm.save();
+                res.status(202).send(existingForm);
             }
         }
         //otherwise create a new one
         if (!status) {
             status = "New_UnknownStatus";
         }
-        const entity = Entity.build({
+        const form = Form.build({
             type,
             description,
             values,
             status
         });
-        entity.save();
+        form.save();
 
-        res.status(201).send(entity);
+        res.status(201).send(form);
         
     }
 );

@@ -16,7 +16,7 @@ router.put(
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
-        let { id, type, description, values, status } = req.body;
+        let { id, type, name, description, values, status } = req.body;
         
         // if we find an existing Action, update it
         if (id && id != 'New') {
@@ -37,8 +37,10 @@ router.put(
         if (!type) {
             type = "Unknown";
         }
+        
         const action = Action.build({
             type,
+            name,
             description,
             values,
             status
@@ -61,7 +63,7 @@ router.put(
     // validateRequest,
     async (req: Request, res: Response) => {
         const type = req.params.type;
-        let { id, description, values, status } = req.body;
+        let { id, name, description, values, status } = req.body;
         
         // if we find an existing entity, update it
         if (id && id != 'New') {
@@ -80,6 +82,7 @@ router.put(
         }
         const action = Action.build({
             type,
+            name,
             description,
             values,
             status

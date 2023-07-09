@@ -1,15 +1,15 @@
 import mongoose from "mongoose";
 
-// interface used to ddescribe the properties used to create a new Entity
-interface EntityAttrs {
+// interface used to ddescribe the properties used to create a new Form
+interface FormAttrs {
     type: string;
     description: string;
     values: JSON;
     status: string;
 }
 
-// properties that an Entity has
-interface EntityDoc extends mongoose.Document {
+// properties that an Form has
+interface FormDoc extends mongoose.Document {
     type: string;
     description: string;
     values: JSON;
@@ -17,12 +17,12 @@ interface EntityDoc extends mongoose.Document {
 }
 
 // interface that describnes the properties tha the model has
-interface EntityModel extends mongoose.Model<EntityDoc> {
-    build(attrs: EntityAttrs): EntityDoc;
+interface FormModel extends mongoose.Model<FormDoc> {
+    build(attrs: FormAttrs): FormDoc;
 }
 
 // describe the schema stored in mongoose
-const EntitySchema = new mongoose.Schema(
+const FormSchema = new mongoose.Schema(
     {
         type: {
             type: String,
@@ -54,10 +54,10 @@ const EntitySchema = new mongoose.Schema(
     }
 );
 
-EntitySchema.statics.build = (attrs: EntityAttrs) => {
-    return new Entity(attrs)
+FormSchema.statics.build = (attrs: FormAttrs) => {
+    return new Form(attrs)
 };
 
-const Entity = mongoose.model<EntityDoc, EntityModel>('entity', EntitySchema);
+const Form = mongoose.model<FormDoc, FormModel>('form', FormSchema);
 
-export { Entity };
+export { Form };

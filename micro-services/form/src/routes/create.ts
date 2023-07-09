@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { body } from 'express-validator';
-import { Entity } from '../models/Entity-mongoose';
+import { Form } from '../models/Form-mongoose';
 import { baseUrl } from '../config/end-points';
 
 declare const validateRequest: (req: Request, res: Response, next: NextFunction) => void;
@@ -12,27 +12,27 @@ router.post(
         body('description').trim().isLength(
                 {max: 2000}
         ).withMessage(
-            'The Entity description cannot be longer than 2000 characters'),
+            'The Form description cannot be longer than 2000 characters'),
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
         const { type, description, values, status } = req.body;
         
-        const existingEntity = await Entity.findOne({ values });
+        const existingForm = await Form.findOne({ values });
 
-        if (existingEntity) {
-            console.error(JSON.stringify(existingEntity));
-            throw new Error('You are attempting to create a duplicate Entity');
+        if (existingForm) {
+            console.error(JSON.stringify(existingForm));
+            throw new Error('You are attempting to create a duplicate Form');
         }
-        const entity = Entity.build({
+        const form = Form.build({
             type,
             description,
             values,
             status
         });
-        entity.save();
+        form.save();
 
-        res.status(201).send(entity);
+        res.status(201).send(form);
     
     }
 );
@@ -40,30 +40,30 @@ router.post(
 router.post(
     `${baseUrl}batch/json/create`,
     async (req: Request, res: Response) => {
-        const { entities }: { entities: any[]} = req.body;
+        const { forms }: { forms: any[]} = req.body;
 
-        const addedEntities = [];
-        for (const nextEntity of entities) {
-            const { type, description, values, status } = nextEntity;
-            const existingEntity = await Entity.findOne({ values });
+        const addedForms = [];
+        for (const nextForm of forms) {
+            const { type, description, values, status } = nextForm;
+            const existingForm = await Form.findOne({ values });
 
-            if (existingEntity) {
-                console.error(JSON.stringify(existingEntity));
-                throw new Error('You are attempting to create a duplicate Entity');
+            if (existingForm) {
+                console.error(JSON.stringify(existingForm));
+                throw new Error('You are attempting to create a duplicate Form');
             }
-            const entity = Entity.build({
+            const form = Form.build({
                 type,
                 description,
                 values,
                 status
             });
-            entity.save();
-            addedEntities.push(entity);
+            form.save();
+            addedForms.push(form);
         }
         
 
 
-        res.status(201).send(addedEntities);
+        res.status(201).send(addedForms);
     
     }
 );

@@ -9,6 +9,8 @@ const router = express.Router();
 router.post(
     `${baseUrl}create`,
     [
+        body('name').notEmpty()
+            .withMessage('All actions require a name'),
         body('description').trim().isLength(
                 {max: 2000}
         ).withMessage(
@@ -16,7 +18,7 @@ router.post(
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
-        const { type, description, values, status } = req.body;
+        const { type, name, description, values, status } = req.body;
         
         const existingAction = await Action.findOne({ values });
 
@@ -26,6 +28,7 @@ router.post(
         }
         const action = Action.build({
             type,
+            name,
             description,
             values,
             status
@@ -44,7 +47,7 @@ router.post(
 
         const addedActions = [];
         for (const nextAction of actions) {
-            const { type, description, values, status } = nextAction;
+            const { type, name, description, values, status } = nextAction;
             const existingAction = await Action.findOne({ values });
 
             if (existingAction) {
@@ -53,6 +56,7 @@ router.post(
             }
             const action = Action.build({
                 type,
+                name,
                 description,
                 values,
                 status

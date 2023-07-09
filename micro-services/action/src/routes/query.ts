@@ -28,6 +28,20 @@ router.get(
 );
 
 router.get(
+    `${baseUrl}query-by-name/:name`,
+    async (req: Request, res: Response) => {
+        // get Action by id
+        const id = req.params.id;
+        if (id === "New") {
+            res.send("{}");
+        }
+
+        const action = await Action.findOne({ name });
+        res.send(action);
+    }
+);
+
+router.get(
     `${baseUrl}query-by-parent-id/one-to-one/:parentId`,
     async (req: Request, res: Response) => {
         // get action by id

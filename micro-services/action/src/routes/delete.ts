@@ -15,4 +15,15 @@ router.delete(
     }
 );
 
+router.delete(
+    `${baseUrl}delete-by-name/:name`,
+    async (req: Request, res: Response) => {
+        // get Action by id
+        const name = req.params.name;
+
+        const action = await Action.findOneAndDelete({ name });
+        res.send(action);
+    }
+);
+
 export { router as deleteRouter };
