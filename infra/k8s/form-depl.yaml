@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: form-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: form
+  template:
+    metadata:
+      labels:
+        app: form
+    spec:
+      containers:
+        - name: form
+          image: pumulo/form
+          imagePullPolicy: Always
+          env:
+            - name: MONGO_URI
+              value: 'mongodb://form-mongo-srv:27017/form'
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: form-srv
+spec:
+  selector:
+    app: form
+  ports:
+    - name: form
+      protocol: TCP
+      port: 3000
+      targetPort: 3000

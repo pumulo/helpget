@@ -17,6 +17,13 @@ spec:
               name: entity-srv
               port:
                 number: 3000
+          - path: /form/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: form-srv
+              port:
+                number: 3000
           - path: /action/?(.*)
             pathType: Prefix
             backend:
