@@ -15,4 +15,15 @@ router.delete(
     }
 );
 
+router.delete(
+    `${baseUrl}delete-by-name/:name`,
+    async (req: Request, res: Response) => {
+        // get Form by id
+        const name = req.params.name;
+
+        const form = await Form.findOneAndDelete({ name });
+        res.send(form);
+    }
+);
+
 export { router as deleteRouter };

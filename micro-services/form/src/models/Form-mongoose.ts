@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 // interface used to ddescribe the properties used to create a new Form
 interface FormAttrs {
     type: string;
+    name: string;
     description: string;
     values: JSON;
     status: string;
@@ -11,6 +12,7 @@ interface FormAttrs {
 // properties that an Form has
 interface FormDoc extends mongoose.Document {
     type: string;
+    name: string;
     description: string;
     values: JSON;
     status: string;
@@ -25,6 +27,10 @@ interface FormModel extends mongoose.Model<FormDoc> {
 const FormSchema = new mongoose.Schema(
     {
         type: {
+            type: String,
+            required: true
+        },
+        name: {
             type: String,
             required: true
         },
@@ -48,6 +54,7 @@ const FormSchema = new mongoose.Schema(
             transform(doc, ret) {
                 ret.id = ret._id;
                 delete ret._id;
+                ret.version = ret.__v;
                 delete ret.__v;
             }
         }

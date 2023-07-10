@@ -9,6 +9,8 @@ const router = express.Router();
 router.post(
     `${baseUrl}create`,
     [
+        body('name').notEmpty()
+            .withMessage('All forms require a name'),
         body('description').trim().isLength(
                 {max: 2000}
         ).withMessage(
@@ -16,7 +18,7 @@ router.post(
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
-        const { type, description, values, status } = req.body;
+        const { type, name, description, values, status } = req.body;
         
         const existingForm = await Form.findOne({ values });
 
@@ -26,6 +28,7 @@ router.post(
         }
         const form = Form.build({
             type,
+            name,
             description,
             values,
             status
@@ -44,7 +47,7 @@ router.post(
 
         const addedForms = [];
         for (const nextForm of forms) {
-            const { type, description, values, status } = nextForm;
+            const { type, name, description, values, status } = nextForm;
             const existingForm = await Form.findOne({ values });
 
             if (existingForm) {
@@ -53,6 +56,7 @@ router.post(
             }
             const form = Form.build({
                 type,
+                name,
                 description,
                 values,
                 status

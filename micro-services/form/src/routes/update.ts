@@ -9,6 +9,10 @@ const router = express.Router();
 router.put(
     `${baseUrl}update`,
     [
+        body('id').notEmpty()
+            .withMessage('You need to specify an id to update this form'),
+        body('name').notEmpty()
+                .withMessage('All forms require a name'),
         body('description').trim().isLength(
                 {max: 2000}
         ).withMessage(
@@ -16,7 +20,7 @@ router.put(
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
-        let { id, type, description, values, status } = req.body;
+        let { id, name, type, description, values, status } = req.body;
         
         // if we find an existing Form, update it
         if (id && id != 'New') {
@@ -39,47 +43,7 @@ router.put(
         }
         const form = Form.build({
             type,
-            description,
-            values,
-            status
-        });
-        form.save();
-
-        res.status(201).send(form);
-        
-    }
-);
-
-router.put(
-    `${baseUrl}/:type/update`,
-    [
-        body('description').trim().isLength(
-                {max: 2000}
-        ).withMessage(
-            'The Form description cannot be longer than 2000 characters'),
-    ],
-    // validateRequest,
-    async (req: Request, res: Response) => {
-        const type = req.params.type;
-        let { id, description, values, status } = req.body;
-        
-        // if we find an existing Form, update it
-        if (id && id != 'New') {
-            const existingForm = await Form.findById(id);
-
-            console.log(JSON.stringify(existingForm));
-            if (existingForm) {
-                existingForm.values = values;
-                existingForm.save();
-                res.status(202).send(existingForm);
-            }
-        }
-        //otherwise create a new one
-        if (!status) {
-            status = "New_UnknownStatus";
-        }
-        const form = Form.build({
-            type,
+            name,
             description,
             values,
             status

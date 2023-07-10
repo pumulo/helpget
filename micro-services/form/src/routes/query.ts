@@ -28,6 +28,16 @@ router.get(
 );
 
 router.get(
+    `${baseUrl}query-by-name/:name`,
+    async (req: Request, res: Response) => {
+        // get Form by name
+        const name = req.params.name;
+        const form = await Form.findOne({ name });
+        res.send(form);
+    }
+);
+
+router.get(
     `${baseUrl}query-by-parent-id/one-to-one/:parentId`,
     async (req: Request, res: Response) => {
         // get Form by id
