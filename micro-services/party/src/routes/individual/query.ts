@@ -28,6 +28,17 @@ router.get(
 );
 
 router.get(
+    `${baseUrl}query-by-email/:email`,
+    async (req: Request, res: Response) => {
+        // get Individual by id
+        const email = req.params.email;
+
+        const individuals = await Individual.findOne({ 'contactInfo.email.1': email });
+        res.send(individuals);
+    }
+);
+
+router.get(
     `${baseUrl}query-by-parent-id/one-to-one/:parentId`,
     async (req: Request, res: Response) => {
         // get Individual by id

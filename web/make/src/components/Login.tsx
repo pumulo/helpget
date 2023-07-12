@@ -1,15 +1,21 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Copyright } from "./Copyright";
+import { useFetchUserQuery } from "../store";
 
 
 interface IFormInput {
     email: String
     password: String
 }
+
 const Login = () => {
     const { register, handleSubmit } = useForm<IFormInput>();
-    const onSubmit: SubmitHandler<IFormInput> = (data) => console.log(data);
+    const { data, error, isLoading } = useFetchUserQuery('pumulo.sikaneta@pega.com');
+
+    const onSubmit: SubmitHandler<IFormInput> = (dataLogin) => {
+        console.log(dataLogin);
+    } 
 
     return (
         <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
