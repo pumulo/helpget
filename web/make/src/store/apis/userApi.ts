@@ -10,7 +10,7 @@ const userApi = createApi({
             fetchUser: builder.query({
                 query: (email) => {
                     return {
-                        url: '/party/individual/query-by-email',
+                        url: '/party/individual/query',
                         params: {
                             email
                         },
