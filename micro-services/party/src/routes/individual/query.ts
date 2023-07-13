@@ -42,10 +42,11 @@ router.get(
     `${baseUrl}query-by-name`,
     async (req: Request, res: Response) => {
         // get Individual by email
-        const name = req.query.name;
-        console.log(`query by ${name}`);
+        const lastName = req.query.name;
+        console.log(`query by ${lastName}`);
 
-        const individuals = await Individual.findOne({ lastNName: name });
+        console.log(`query with no string ${JSON.stringify(await Individual.find({ lastName }))}`);
+        const individuals = await Individual.findOne({ lastName });
         res.send(individuals);
     }
 );

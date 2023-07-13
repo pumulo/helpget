@@ -9,8 +9,10 @@ import {
     createOrganizationRouter, deleteOrganizationRouter, queryOrganizationRouter, updateOrganizationRouter,
     createRelationshipRouter, deleteRelationshipRouter, queryRelationshipRouter, updateRelationshipRouter
 } from './routes';
+var cors = require('cors');
 
 const app = express();
+app.use(cors());
 app.set('trust proxy', true);
 app.use(json());
 app.use(

@@ -11,7 +11,7 @@ interface IFormInput {
 
 const Login = () => {
     const { register, handleSubmit } = useForm<IFormInput>();
-    const { data, error, isLoading } = useFetchUserQuery('pumulo.sikaneta@pega.com');
+    const { data, error, isLoading } = useFetchUserQuery('Sikaneta');
 
     const onSubmit: SubmitHandler<IFormInput> = (dataLogin) => {
         console.log(dataLogin);
