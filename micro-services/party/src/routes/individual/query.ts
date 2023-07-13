@@ -43,8 +43,9 @@ router.get(
     async (req: Request, res: Response) => {
         // get Individual by email
         const name = req.query.name;
+        console.log(`query by ${name}`);
 
-        const individuals = await Individual.findOne({ 'lastNName': name });
+        const individuals = await Individual.findOne({ lastNName: name });
         res.send(individuals);
     }
 );

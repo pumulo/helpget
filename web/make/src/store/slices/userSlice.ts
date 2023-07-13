@@ -5,8 +5,8 @@ const userSlice = createSlice({
     name: 'userLegacy',
     initialState: {
         data: {
-            email: 'pumulo.sikaneta@pega.com',
-            password: 'get-it'
+            name: 'Sikaneta',
+            sec: 'get-it'
         }
     },
     reducers: {
