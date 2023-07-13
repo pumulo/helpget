@@ -28,12 +28,23 @@ router.get(
 );
 
 router.get(
-    `${baseUrl}query-by-email/:email`,
+    `${baseUrl}query-by-email`,
     async (req: Request, res: Response) => {
-        // get Individual by id
-        const email = req.params.email;
+        // get Individual by email
+        const email = req.query.email;
 
         const individuals = await Individual.findOne({ 'contactInfo.email.1': email });
+        res.send(individuals);
+    }
+);
+
+router.get(
+    `${baseUrl}query-by-name`,
+    async (req: Request, res: Response) => {
+        // get Individual by email
+        const name = req.query.name;
+
+        const individuals = await Individual.findOne({ 'lastNName': name });
         res.send(individuals);
     }
 );
