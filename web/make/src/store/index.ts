@@ -19,4 +19,4 @@ const store = configureStore({
 setupListeners(store.dispatch);
 
 export { store };
-export { useFetchUserQuery } from './apis/userApi';
+export { useUserQuery } from './apis/userApi';

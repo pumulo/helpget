@@ -8,8 +8,8 @@ const userApi = createApi({
     }),
     endpoints(builder) {
         return {
-            fetchUser: builder.query({
-                query: (email) => {
+            user: builder.query({
+                query: (name) => {
                     return {
                         url: '/party/individual/query-by-name',
                         params: {
@@ -24,5 +24,5 @@ const userApi = createApi({
 
 })
 
-export const { useFetchUserQuery } = userApi;
+export const { useUserQuery } = userApi;
 export { userApi };

@@ -5,7 +5,6 @@ const App = () => {
     return (
         <div className="container mx-auto">
             <Login />
-            <Splash />
         </div>
     );
 };

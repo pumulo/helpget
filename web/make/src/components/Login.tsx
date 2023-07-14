@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Copyright } from "./Copyright";
-import { useFetchUserQuery } from "../store";
+import { Splash } from "./Splash";
 
 
 interface IFormInput {
-    email: String
-    password: String
+    name: String
+    security: String
 }
 
 const Login = () => {
+    
     const { register, handleSubmit } = useForm<IFormInput>();
-    const { data, error, isLoading } = useFetchUserQuery('Sikaneta');
-
     const onSubmit: SubmitHandler<IFormInput> = (dataLogin) => {
         console.log(dataLogin);
-    } 
+        setLogin(<Splash login={dataLogin.name} />);
+    }
 
-    return (
+    const [content, setLogin] = useState(
         <div className="container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10">
             <form
                 className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -25,12 +25,12 @@ const Login = () => {
             >
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
-                        Email
+                        Last Name
                     </label>
                     <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        {...register("email")}
-                    />    
+                        {...register("name")}
+                    />
                 </div>
                 <div className="mb-6">
                     <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -40,7 +40,7 @@ const Login = () => {
                         type="password"
                         className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="******************"
-                        {...register("password")}
+                        {...register("security")}
                     />
                     <p className="text-red-500 text-xs italic">Please choose a password.</p>
                 </div>
@@ -57,6 +57,14 @@ const Login = () => {
             </form>
             <Copyright />
         </div>
+    );
+
+
+    return (
+        <div>
+            {content}
+        </div>
+
     )
 }
 
