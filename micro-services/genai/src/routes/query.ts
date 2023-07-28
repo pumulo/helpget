@@ -1,9 +1,13 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
 import { baseUrl } from '../config/end-points';
-import { genai_k } from '../config/cgpt_ek';
+import { openai } from '../config/openai';
+import { ChatCompletionRequestMessage } from 'openai';
 
 const router = express.Router();
+
+const conversationContext: string[] = [];
+const currentMessages: ChatCompletionRequestMessage[] = [];
 
 router.post(
     `${baseUrl}query`,
@@ -14,14 +18,25 @@ router.post(
     // validateRequest,
     async (req: Request, res: Response) => {
         const { prompt } = req.body;
+        const modelId = "gpt-3.5-turbo";
+        const promptText = `${prompt}\n\nResponse:`;
+        // Restore the previous context
+        for (const [inputText, responseText] of conversationContext) {
+            currentMessages.push({ role: "user", content: inputText });
+            currentMessages.push({ role: "assistant", content: responseText });
+        }
+
+        // Stores the new message
+        currentMessages.push({ role: "user", content: promptText });
         
+        const result = await openai.createChatCompletion({
+            model: modelId,
+            messages: currentMessages,
+        });
         console.log(`make a gen ai post call with prompt ${prompt}`);
-        const placeholder = {
-            response: 'implementation penmding',
-            key: genai_k
-        };
-        res.status(201).send(placeholder);
-    
+        // const responseText = result.data.choices.shift().message.content;
+        // conversationContext.push([promptText, responseText]);
+        res.send({ response: result });
     }
 );
 
