@@ -2,7 +2,9 @@ import React from "react";
 
 const ActionHome = () => {
     return (
-        'Action Home'
+        <div>
+            Action Home  
+        </div>
     )
 };
 

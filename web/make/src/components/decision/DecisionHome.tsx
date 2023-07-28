@@ -2,7 +2,9 @@ import React from "react";
 
 const DecisionHome = () => {
     return (
-        'Decision Home'
+        <div>
+            Decision Home  
+        </div>
     )
 };
 

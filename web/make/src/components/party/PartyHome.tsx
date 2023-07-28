@@ -2,7 +2,9 @@ import React from "react";
 
 const PartyHome = () => {
     return (
-        'Party Home'
+        <div>
+            Party Home  
+        </div>
     )
 };
 

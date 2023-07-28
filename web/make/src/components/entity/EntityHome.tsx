@@ -2,7 +2,9 @@ import React from "react";
 
 const EntityHome = () => {
     return (
-        'Entity Home'
+        <div>
+            Entity Home  
+        </div>
     )
 };
 

@@ -38,6 +38,13 @@ spec:
               name: decision-srv
               port:
                 number: 3000
+          - path: /genai/?(.*)
+            pathType: Prefix
+            backend:
+             service:
+              name: genai-srv
+              port:
+                number: 3000
           - path: /party/?(.*)
             pathType: Prefix
             backend:

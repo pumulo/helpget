@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Copyright } from "./Copyright";
 import { Splash } from "./Splash";
 
 
@@ -55,7 +54,6 @@ const Login = () => {
                     </a>
                 </div>
             </form>
-            <Copyright />
         </div>
     );
 
