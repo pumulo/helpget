@@ -34,9 +34,10 @@ router.post(
             messages: currentMessages,
         });
         console.log(`make a gen ai post call with prompt ${prompt}`);
-        // const responseText = result.data.choices.shift().message.content;
-        // conversationContext.push([promptText, responseText]);
-        res.send({ response: result });
+        const responseChoice = result.data.choices[0];
+        const responseText = responseChoice.message?.content;
+        // conversationContext.push([prompt, responseText]);
+        res.send({ response: responseText });
     }
 );
 
