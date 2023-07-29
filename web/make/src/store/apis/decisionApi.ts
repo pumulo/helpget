@@ -1,17 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const entityApi = createApi({
-    reducerPath: 'entity',
+const decisionApi = createApi({
+    reducerPath: 'decision',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://api.get-it.solutions'
     }),
     
     endpoints(builder) {
         return {
-            entity: builder.query({
+            decision: builder.query({
                 query: (id) => {
                     return {
-                        url: `/entity/query-by-id/${id}`,
+                        url: `/decision/query-by-id/${id}`,
                         method: 'GET'
                     };
                 }
@@ -21,18 +21,18 @@ const entityApi = createApi({
 
 })
 
-const entityListApi = createApi({
-    reducerPath: 'entityList',
+const decisionListApi = createApi({
+    reducerPath: 'decisionList',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://api.get-it.solutions'
     }),
     
     endpoints(builder) {
         return {
-            entityList: builder.query({
+            decisionList: builder.query({
                 query: () => {
                     return {
-                        url: `/entity/query`,
+                        url: `/decision/query`,
                         method: 'GET'
                     };
                 }
@@ -42,6 +42,6 @@ const entityListApi = createApi({
 
 })
 
-export const { useEntityQuery } = entityApi;
-export const { useEntityListQuery } = entityListApi;
-export { entityApi, entityListApi };
+export const { useDecisionQuery } = decisionApi;
+export const { useDecisionListQuery } = decisionListApi;
+export { decisionApi, decisionListApi };

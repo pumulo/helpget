@@ -1,17 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const entityApi = createApi({
-    reducerPath: 'entity',
+const formApi = createApi({
+    reducerPath: 'form',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://api.get-it.solutions'
     }),
     
     endpoints(builder) {
         return {
-            entity: builder.query({
+            form: builder.query({
                 query: (id) => {
                     return {
-                        url: `/entity/query-by-id/${id}`,
+                        url: `/form/query-by-id/${id}`,
                         method: 'GET'
                     };
                 }
@@ -21,18 +21,18 @@ const entityApi = createApi({
 
 })
 
-const entityListApi = createApi({
-    reducerPath: 'entityList',
+const formListApi = createApi({
+    reducerPath: 'formList',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://api.get-it.solutions'
     }),
     
     endpoints(builder) {
         return {
-            entityList: builder.query({
+            formList: builder.query({
                 query: () => {
                     return {
-                        url: `/entity/query`,
+                        url: `/form/query`,
                         method: 'GET'
                     };
                 }
@@ -42,6 +42,6 @@ const entityListApi = createApi({
 
 })
 
-export const { useEntityQuery } = entityApi;
-export const { useEntityListQuery } = entityListApi;
-export { entityApi, entityListApi };
+export const { useFormQuery } = formApi;
+export const { useFormListQuery } = formListApi;
+export { formApi, formListApi };

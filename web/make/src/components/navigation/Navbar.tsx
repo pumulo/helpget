@@ -17,6 +17,7 @@ const Navbar = () => {
         {name: 'Action', link: '/action'},
         {name: 'Decision', link: '/decision'},
         {name: 'Entity', link: '/entity'},
+        {name: 'Gen AI', link: '/genai'},
         {name: 'Party', link: '/party'},
     ]
 

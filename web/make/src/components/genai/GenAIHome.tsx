@@ -1,13 +1,16 @@
 import React from "react";
-import { useEntityListQuery } from "../../store";
+import { useGenaiQuery } from "../../store/apis/genaiApi";
 
-const EntityHome = () => {
-    const { data, error, isLoading } = useEntityListQuery('all');
+const GenaiHome = () => {
+    const payload = {
+        prompt: 'Give a description of generative ai and recent developments'
+    }
+    const { data, error, isLoading } = useGenaiQuery(payload);
     let content;
     if (isLoading) {
         content = <i>loading...</i>
     } else if (error) {
-        content = <div>Error loading entity</div>
+        content = <div>Error loading generative ai response</div>
     } else {
         if (data) {
             content = <p>Currently selected: {JSON.stringify(data)}</p>
@@ -17,10 +20,10 @@ const EntityHome = () => {
     }
     return (
         <div>
-            Entity Home
+            Generative AI Home
             {content}
         </div>
     )
 };
 
-export default EntityHome;
+export default GenaiHome;

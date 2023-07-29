@@ -9,6 +9,7 @@ import DecisionHome from "./components/decision/DecisionHome";
 import EntityHome from "./components/entity/EntityHome";
 import PartyHome from "./components/party/PartyHome";
 import AppLayout from "./components/AppLayout";
+import GenaiHome from "./components/genai/GenAIHome";
   
 const router = createBrowserRouter(
     [
@@ -36,6 +37,10 @@ const router = createBrowserRouter(
                 {
                     path: "/entity",
                     element: < EntityHome />
+                },
+                {
+                    path: "/genai",
+                    element: < GenaiHome />
                 },
                 {
                     path: "/party",
