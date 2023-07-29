@@ -5,6 +5,14 @@ import cookieSession from 'cookie-session';
 import { aboutRouter, createRouter, queryRouter } from './routes';
 
 const app = express();
+
+const cors = require('cors');
+// app.use(cors(
+//     {
+//         origin: 'make.get-it.solutions'
+//     }
+// ));
+app.use(cors());
 app.set('trust proxy', true);
 app.use(json());
 app.use(

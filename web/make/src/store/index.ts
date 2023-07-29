@@ -2,17 +2,18 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userReducer } from "./slices/userSlice";
 import { userApi } from "./apis/userApi";
-import { curryGetDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
-import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
+import { entityApi } from "./apis/entityApi";
 
 const store = configureStore({
     reducer: {
         userLegacy: userReducer,
-        [userApi.reducerPath]: userApi.reducer
+        [userApi.reducerPath]: userApi.reducer,
+        [entityApi.reducerPath]: entityApi.reducer
     },
     middleware: (curryGetDefaultMiddleware) => {
         return curryGetDefaultMiddleware()
-            .concat(userApi.middleware);
+            .concat(userApi.middleware)
+            .concat(entityApi.middleware);
     }
 });
 
@@ -20,3 +21,4 @@ setupListeners(store.dispatch);
 
 export { store };
 export { useUserQuery } from './apis/userApi';
+export { useEntityQuery } from './apis/entityApi';
