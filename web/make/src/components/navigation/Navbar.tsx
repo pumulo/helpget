@@ -14,11 +14,11 @@ import icon from '../../assets/images/get_IT_logo.png';
 
 const Navbar = () => {
     const links = [
-        {name: 'Action', link: '/action'},
-        {name: 'Decision', link: '/decision'},
-        {name: 'Entity', link: '/entity'},
-        {name: 'Gen AI', link: '/genai'},
-        {name: 'Party', link: '/party'},
+        {name: 'Action', id: 'actionNavId', link: '/action'},
+        {name: 'Decision', id: 'decisionNavId', link: '/decision'},
+        {name: 'Entity', id: 'entityNavId', link: '/entity'},
+        {name: 'Gen AI', id: 'genaiNavId', link: '/genai'},
+        {name: 'Party', id: 'partyNavId', link: '/party'},
     ]
 
     let [isOpen, setIsOpen] = useState(false);
@@ -54,10 +54,10 @@ const Navbar = () => {
                     {
                         links.map(
                             link => (
-                                <li className='font-semibold my-7 md:my-0 md:ml-8 '>
+                                <li className='font-semibold my-7 md:my-0 md:ml-8 ' key={link.id}>
                                     <NavLink
                                         to={link.link}
-                                        
+                                        id={link.id}
                                     >
                                         {link.name}
                                     </NavLink>

@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { userReducer } from "./slices/userSlice";
 import { userApi } from "./apis/userApi";
-import { entityApi, entityListApi } from "./apis/entityApi";
+import { entityApi } from "./apis/entityApi";
 import { actionApi, actionListApi } from "./apis/actionApi";
 import { decisionApi, decisionListApi } from "./apis/decisionApi";
 import { formApi, formListApi } from "./apis/formApi";
@@ -13,7 +13,6 @@ const store = configureStore({
         userLegacy: userReducer,
         [userApi.reducerPath]: userApi.reducer,
         [entityApi.reducerPath]: entityApi.reducer,
-        [entityListApi.reducerPath]: entityListApi.reducer,
         [actionApi.reducerPath]: actionApi.reducer,
         [actionListApi.reducerPath]: actionListApi.reducer,
         [decisionApi.reducerPath]: decisionApi.reducer,
@@ -26,7 +25,6 @@ const store = configureStore({
         return curryGetDefaultMiddleware()
             .concat(userApi.middleware)
             .concat(entityApi.middleware)
-            .concat(entityListApi.middleware)
             .concat(actionApi.middleware)
             .concat(actionListApi.middleware)
             .concat(decisionApi.middleware)
@@ -43,6 +41,6 @@ export { store };
 export { useUserQuery } from './apis/userApi';
 export { useActionQuery, useActionListQuery } from './apis/actionApi';
 export { useDecisionQuery, useDecisionListQuery } from './apis/decisionApi';
-export { useEntityQuery, useEntityListQuery } from './apis/entityApi';
+export { useEntityQuery, useEntityListQuery, useNewEntityMutation } from './apis/entityApi';
 export { useFormQuery, useFormListQuery } from './apis/formApi';
 export { useGenaiQuery } from './apis/genaiApi';

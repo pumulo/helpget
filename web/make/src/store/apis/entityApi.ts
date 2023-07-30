@@ -6,42 +6,41 @@ const entityApi = createApi({
         baseUrl: 'http://api.get-it.solutions'
     }),
     
-    endpoints(builder) {
-        return {
-            entity: builder.query({
-                query: (id) => {
-                    return {
-                        url: `/entity/query-by-id/${id}`,
-                        method: 'GET'
-                    };
-                }
-            })
-        };
-    },
+    endpoints: (builder) => ({
+        entity: builder.query({
+            query: (id) => {
+                return {
+                    url: `/entity/query-by-id/${id}`,
+                    method: 'GET'
+                };
+            }
+        }),
+        entityList: builder.query({
+            query: () => {
+                return {
+                    url: `/entity/query`,
+                    method: 'GET'
+                };
+            }
+        }),
+        newEntity: builder.mutation({
+            query: (payload) => {
+                return {
+                    url: `/entity/create`,
+                    method: 'POST',
+                    body: payload,
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                };
+            }
+        })
+    })
+});
 
-})
-
-const entityListApi = createApi({
-    reducerPath: 'entityList',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'http://api.get-it.solutions'
-    }),
-    
-    endpoints(builder) {
-        return {
-            entityList: builder.query({
-                query: () => {
-                    return {
-                        url: `/entity/query`,
-                        method: 'GET'
-                    };
-                }
-            })
-        };
-    },
-
-})
-
-export const { useEntityQuery } = entityApi;
-export const { useEntityListQuery } = entityListApi;
-export { entityApi, entityListApi };
+export const {
+    useEntityQuery,
+    useEntityListQuery,
+    useNewEntityMutation
+} = entityApi;
+export { entityApi };

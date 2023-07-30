@@ -6,12 +6,24 @@ import { aboutRouter, createRouter, deleteRouter, queryRouter, updateRouter } fr
 
 const app = express();
 const cors = require('cors');
-// app.use(cors(
-//     {
-//         origin: 'make.get-it.solutions'
-//     }
-// ));
-app.use(cors());
+
+const corsOptions = {
+    origin: '*',
+  
+    methods: [
+        'GET',
+        'POST',
+        'DELETE',
+        'PATCH'
+    ],
+  
+    allowedHeaders: [
+      'Content-Type',
+    ],
+    // credentials: true
+
+  };
+app.use(cors(corsOptions));
 app.set('trust proxy', true);
 app.use(json());
 app.use(

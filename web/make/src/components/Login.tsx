@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Splash } from "./Splash";
+import { TextInput } from "./ui";
 
 
 interface IFormInput {

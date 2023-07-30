@@ -31,7 +31,6 @@ router.post(
             status
         });
         entity.save();
-
         res.status(201).send(entity);
     
     }
