@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNewEntityMutation } from "../../../store";
 import { TextArea, TextInput } from "../../ui";
@@ -11,20 +11,23 @@ export type IFormEntityInput = {
     values: {}
     status: String
 }
-const navigate = useNavigate();
 const CreateEntity = () => {
+    let navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit } = useForm<IFormEntityInput>();
     const [
         createEntity, // This is the mutation trigger
         { isLoading: isUpdating }, // This is the destructured mutation result
     ] = useNewEntityMutation()
     
+    const loadEntityHome = () => {
+        navigate('../../entity', {relative: 'path'});
+    }
 
     const onSubmit: SubmitHandler<IFormEntityInput> = async (fData) => {
         const payload = JSON.parse(JSON.stringify(fData));
         payload.values = JSON.parse(payload.values);
         createEntity(payload);
-        navigate('/entity')
+        loadEntityHome();
     };
     
     return (
