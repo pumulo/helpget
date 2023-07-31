@@ -43,4 +43,4 @@ export { useActionQuery, useActionListQuery } from './apis/actionApi';
 export { useDecisionQuery, useDecisionListQuery } from './apis/decisionApi';
 export { useEntityQuery, useEntityListQuery, useNewEntityMutation } from './apis/entityApi';
 export { useFormQuery, useFormListQuery } from './apis/formApi';
-export { useGenaiQuery } from './apis/genaiApi';
+export { useGenaiQuery, useGenAIJsonQuery, useGenAIJsonPMutation } from './apis/genaiApi';
