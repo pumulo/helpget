@@ -11,6 +11,7 @@ export type IFormEntityInput = {
     values: {}
     status: String
 }
+
 const CreateEntity = () => {
     let navigate = useNavigate();
     const { register, formState: { errors }, handleSubmit } = useForm<IFormEntityInput>();
@@ -23,10 +24,17 @@ const CreateEntity = () => {
         navigate('../../entity', {relative: 'path'});
     }
 
+    const sleep = (ms: number) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     const onSubmit: SubmitHandler<IFormEntityInput> = async (fData) => {
         const payload = JSON.parse(JSON.stringify(fData));
         payload.values = JSON.parse(payload.values);
         createEntity(payload);
+        while (isUpdating) {
+            await sleep(500);
+        }
         loadEntityHome();
     };
     

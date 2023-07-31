@@ -5,5 +5,8 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  variants: {
+    tableLayout: ['responsive', 'hover', 'focus'],
+  }
 }
 
