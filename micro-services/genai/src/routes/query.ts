@@ -59,7 +59,7 @@ router.post(
                 const { message } = submission
                 const builderMessagePrompt = `${message}\n\nResponse:`;
                 currentMessages.push({ role: "user", content: builderMessagePrompt });
-                console.log(currentMessages);
+                // console.log(currentMessages);
                 const result = await openai.createChatCompletion({
                     model: modelId,
                     messages: currentMessages,
@@ -105,7 +105,7 @@ router.post(
         const { prompt } = req.body;
         const modelId = "gpt-3.5-turbo";
         const promptText = `${prompt}\n\nResponse:`;
-
+        
         // Stores the new message
         currentMessages.push({ role: "user", content: promptText });
         

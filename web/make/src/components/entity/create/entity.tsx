@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler  } from "react-hook-form";
 import { useNewEntityMutation, useGenAIJsonPMutation } from "../../../store";
@@ -6,6 +6,7 @@ import { TextArea, TextInput } from "../../ui";
 import { FaClipboardList, FaPlus, FaStar } from "react-icons/fa";
 
 export type IFormEntityInput = {
+    id: String
     type: String
     description: String
     values: {}

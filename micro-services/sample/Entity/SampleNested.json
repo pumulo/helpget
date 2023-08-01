@@ -1,0 +1,28 @@
+{
+    "type": "Person",
+    "description": "This is a person entity",
+    "values": {
+        "name": "Pumulo Sikaneta",
+        "dateOfBirth": "January 20th, 1977",
+        "citizenship": [
+            {
+                "country": "USA"
+            },
+            {
+                "country": "Canada"
+            }
+        ],
+        "gc_Address": {
+            "streetOne": "319 Fayetteville St",
+            "streetTwo": "Unit 306",
+            "city": "Raleigh",
+            "state": "NC",
+            "country": "USA",
+            "zipPostalCOde": "27601"
+        },
+        "sex": "Male",
+        "height": "6'",
+        "weight": "185 lbs"
+    },
+    "status": "create-source-postman"
+}

@@ -1,26 +1,30 @@
 import React from "react";
+import JSONPretty from 'react-json-pretty';
 import { useEntityListQuery } from "../../../store";
 
 interface EntityI {
+    id: string
     type: string
     description: string
     values: {}
     status: string
+    createdAt: string
 }
 
 export const EntityList = () => {
     const { data, error, isLoading } = useEntityListQuery('all');
     const entityArray: EntityI[] = data;
     let content;
+    var JSONPrettyMon = require('react-json-pretty/dist/monikai');
     
 
-    const createRow = (index: number, type: string, description: string, values: string, status: string) => {
+    const createRow = (id: string, type: string, description: string, values: string, status: string, createdAt: string) => {
         return (
-            <tr className="border-b dark:border-neutral-500" key={`etr${index}`}>
-                <td className="border px-6 py-4 font-medium">{index}</td>
+            <tr className="border-b dark:border-neutral-500" key={`etr${id}`}>
+                <td className="border px-6 py-4 font-medium">{id}<br />------------------------------<br />{(new Date(createdAt)).toLocaleString()}</td>
                 <td className="border px-6 py-4">{type}</td>
                 <td className="border px-6 py-4">{description}</td>
-                <td className="border px-6 py-4">{values}</td>
+                <td className="border px-6 py-4"><JSONPretty data={values} theme={JSONPrettyMon}></JSONPretty></td>
                 <td className="border px-6 py-4">{status}</td>
             </tr>
         )
@@ -34,11 +38,12 @@ export const EntityList = () => {
                     entityArray.map(
                         (entity, index) => {
                             return createRow(
-                                index,
+                                entity.id,
                                 entity.type,
                                 entity.description,
                                 JSON.stringify(entity.values),
-                                entity.status
+                                entity.status,
+                                entity.createdAt
                             )
                         }
                     )
@@ -82,24 +87,24 @@ export const EntityList = () => {
 
     return (
         <div className="flex flex-col overflow-x-auto">
-        <div className="sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-            <div className="overflow-x-auto">
-                <table className="shadow min-w-full text-left text-sm font-light table-auto">
-                    <thead className="border-b font-medium dark:border-neutral-500 place-items-auto text-center">
-                        <tr>
-                        <th scope="col" className="border w-1/16 px-6 py-4">#</th>
-                        <th scope="col" className="border px-1/8 py-4">Type</th>
-                        <th scope="col" className="border px-1/4 py-4">Description</th>
-                        <th scope="col" className="border w-1/2px-6 py-4">Values</th>
-                        <th scope="col" className="border px-1/16 py-4">Status</th>
-                        </tr>
-                    </thead>
-                    {content}
-                </table>
-            </div>
+            <div className="sm:-mx-6 lg:-mx-8">
+                <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                    <div className="overflow-x-auto">
+                        <table className="shadow min-w-full text-left text-sm font-light table-auto">
+                            <thead className="border-b font-medium dark:border-neutral-500 place-items-auto text-center">
+                                <tr>
+                                <th scope="col" className="border w-1/8 px-6 py-4">ID <br />------------------------------<br />Created</th>
+                                <th scope="col" className="border px-1/8 py-4">Type</th>
+                                <th scope="col" className="border px-1/4 py-4">Description</th>
+                                <th scope="col" className="border w-7/16 px-6 py-4">Values</th>
+                                <th scope="col" className="border px-1/16 py-4">Status</th>
+                                </tr>
+                            </thead>
+                            {content}
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-</div>
     )
 }

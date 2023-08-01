@@ -60,4 +60,4 @@ EntitySchema.statics.build = (attrs: EntityAttrs) => {
 
 const Entity = mongoose.model<EntityDoc, EntityModel>('entity', EntitySchema);
 
-export { Entity };
+export { Entity, EntityDoc };

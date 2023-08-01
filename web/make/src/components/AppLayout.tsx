@@ -9,8 +9,8 @@ const AppLayout = () => {
             <Navbar />
             <main className="flex-grow absolute mb-auto h-10 top-24 container mx-auto px-4 sm:px-6">
                 <Outlet />
+                <Copyright />
             </main>
-            <Copyright />
         </div>
     )
 }

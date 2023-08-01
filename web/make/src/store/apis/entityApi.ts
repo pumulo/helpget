@@ -34,6 +34,18 @@ const entityApi = createApi({
                     },
                 };
             }
+        }),
+        newEntityBatch: builder.mutation({
+            query: (payload) => {
+                return {
+                    url: `/entity/batch/json/create`,
+                    method: 'POST',
+                    body: payload,
+                    headers: {
+                        'Content-type': 'application/json'
+                    },
+                };
+            }
         })
     })
 });
@@ -41,6 +53,7 @@ const entityApi = createApi({
 export const {
     useEntityQuery,
     useEntityListQuery,
-    useNewEntityMutation
+    useNewEntityMutation,
+    useNewEntityBatchMutation
 } = entityApi;
 export { entityApi };
