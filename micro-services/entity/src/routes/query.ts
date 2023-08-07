@@ -46,7 +46,22 @@ router.get(
         // get entities by type
         const type = req.params.type;
 
-        const entitiesByType = await Entity.find( { type });
+        const entitiesByType = await Entity.find(
+            { type }
+        );
+        res.send(entitiesByType);
+    }
+);
+
+router.get(
+    `${baseUrl}query-by-type-ss/:typeSS`,
+    async (req: Request, res: Response) => {
+        // get entities by type
+        const type = req.params.typeSS;
+
+        const entitiesByType = await Entity.find(
+            { "type": { $regex: type, $options: "i" } }
+        );
         res.send(entitiesByType);
     }
 );

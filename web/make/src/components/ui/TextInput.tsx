@@ -14,17 +14,20 @@ export const TextInput = <TFormValues extends Record<string, unknown>>({
       <div>
             
             <label className="text-gray-600 font-medium" htmlFor={id}>
-                {label}
+              {label}
             </label>
             <input
-                className="border-solid border-gray-300 border py-2 px-4 w-full
-rounded text-gray-700"
-                id={id}
-                autoFocus
-                {...(register && register(name, rules))}
-                {...props}
+            className={
+              errors ?
+                `shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline`:
+                `border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700`
+              }
+              id={id}
+              autoFocus
+              {...(register && register(name, rules))}
+              {...props}
             />
-            {errors && <div>{errors.message}</div>
+            {errors && <div className='text-red-500 text-xs italic'>{errors.message}</div>
             }
       </div>
     );

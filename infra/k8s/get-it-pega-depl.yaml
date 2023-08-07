@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: get-it-shown-depl
+  name: get-it-pega-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: get-it-shown
+      app: get-it-pega
   template:
     metadata:
       labels:
-        app: get-it-shown
+        app: get-it-pega
     spec:
       containers:
-        - name: get-it-shown
-          image: pumulo/get-it-shown
+        - name: get-it-pega
+          image: pumulo/pega_get-it
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: get-it-shown-srv
+  name: get-it-pega-srv
 spec:
   selector:
-    app: get-it-shown
+    app: get-it-pega
   ports:
-    - name: get-it-shown
+    - name: get-it-pega
       port: 3000
       targetPort: 3000

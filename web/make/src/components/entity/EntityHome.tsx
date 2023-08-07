@@ -1,9 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { EntityList } from "./report/EntityList";
+import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom'
-
+import { TextInput } from "../ui";
+export type IFormTypeInput = {
+    category: String
+}
 const EntityHome = () => {
     let navigate = useNavigate();
+    const [type, setType] = useState('');
+    const { register, watch, formState: { errors } } = useForm<IFormTypeInput>();
+
+    // Callback version of watch.  It's your responsibility to unsubscribe when done.
+    // console.log(watch(type));
+    React.useEffect(() => {
+        const subscription = watch(
+            (val) => {
+                setType(val.category as string);
+            }
+        )
+        
+        return () => subscription.unsubscribe()
+    }, [watch])
 
     const gotoPage = (route: string) => {
         navigate(route);
@@ -14,12 +32,19 @@ const EntityHome = () => {
 
     return (
         <div>
-            
-            <h3 className="text-2xl font-bold">
-                Entity
-            </h3>
-
-            <div className="flex flex-col items-center justify-center" role="group">
+            <form action="">
+                <TextInput<IFormTypeInput>
+                    id='typeId'
+                    name='category'
+                    label='Entity Type'
+                    register={register}
+                    rules={{ required: 'You must enter a type' }}
+                    errors={errors.category}
+                    //@ts-ignore
+                    // onChange = { onTypeChange }
+                />
+            </form>
+            <div className="flex flex-col items-center justify-center pt-5" role="group">
                 <div>
                     <button
                         type="button"
@@ -50,7 +75,7 @@ const EntityHome = () => {
                     </button>
                 </div>
             </div>
-            <EntityList />
+            <EntityList type={type} />
         </div>
     )
 };

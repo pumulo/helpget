@@ -105,22 +105,88 @@ router.post(
         const { prompt } = req.body;
         const modelId = "gpt-3.5-turbo";
         const promptText = `${prompt}\n\nResponse:`;
+        console.log('received request' + prompt)
         
         // Stores the new message
         currentMessages.push({ role: "user", content: promptText });
-        
-        let result = await openai.createChatCompletion({
-            model: modelId,
-            messages: currentMessages,
-        });
-        console.log(`make a gen ai post call with prompt ${prompt}`);
-        let responseChoice = result.data.choices[0];
-        let responseText = responseChoice.message?.content;
+        let result;
+        let responseChoice;
+        let responseText;
+
+        try {
+            result = await openai.createChatCompletion({
+                model: modelId,
+                messages: currentMessages,
+            });
+            console.log(`make a gen ai post call with prompt ${prompt}`);
+            responseChoice = result.data.choices[0];
+            responseText = responseChoice.message?.content;
+        } catch (error) {
+            console.log(`Error in try catch with message ${error}`);
+        }
         currentMessages.push({ role: "assistant", content: responseText });
         
         
         // submit the final prompt
         const promptJSON = `Return the value in json format\n\nResponse:`;
+        
+
+        // Stores the new message
+        currentMessages.push({ role: "user", content: promptJSON });
+        
+        result = await openai.createChatCompletion({
+            model: modelId,
+            messages: currentMessages,
+        });
+        
+        responseChoice = result.data.choices[0];
+        responseText = responseChoice.message?.content;
+        currentMessages.push({ role: "assistant", content: responseText });
+        
+        if (responseText) {
+            res.send({ response: JSON.parse(responseText) });
+        }
+        res.send('Error');
+    }
+);
+
+router.post(
+    `${baseUrl}json/batch/query`,
+    [
+        body('prompt').notEmpty()
+            .withMessage('All gen ai calls require a prompt')
+    ],
+    // validateRequest,
+    async (req: Request, res: Response) => {
+        const conversationContext: string[] = [];
+        const currentMessages: ChatCompletionRequestMessage[] = [];
+        const { prompt } = req.body;
+        const modelId = "gpt-3.5-turbo";
+        const promptText = `${prompt}\n\nResponse:`;
+        console.log('received request' + prompt)
+        
+        // Stores the new message
+        currentMessages.push({ role: "user", content: promptText });
+        let result;
+        let responseChoice;
+        let responseText;
+
+        try {
+            result = await openai.createChatCompletion({
+                model: modelId,
+                messages: currentMessages,
+            });
+            console.log(`make a gen ai post call with prompt ${prompt}`);
+            responseChoice = result.data.choices[0];
+            responseText = responseChoice.message?.content;
+        } catch (error) {
+            console.log(`Error in try catch with message ${error}`);
+        }
+        currentMessages.push({ role: "assistant", content: responseText });
+        
+        
+        // submit the final prompt
+        const promptJSON = `Return the response as an array in json format\n\nResponse:`;
         
 
         // Stores the new message

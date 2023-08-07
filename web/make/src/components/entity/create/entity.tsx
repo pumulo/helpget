@@ -16,7 +16,13 @@ export type IFormEntityInput = {
 const CreateEntity = () => {
     let navigate = useNavigate();
 
-    const { register, getValues, formState: { errors }, handleSubmit, setValue } = useForm<IFormEntityInput>();
+    const { register, getValues, formState: { errors }, handleSubmit, setValue } = useForm<IFormEntityInput>(
+        {
+            defaultValues: {
+                status: 'New-CreatedInGetIT'
+            }
+        }
+    );
     const [
         createEntity, // This is the mutation trigger
         { isLoading }, // This is the destructured mutation result

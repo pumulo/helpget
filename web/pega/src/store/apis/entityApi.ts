@@ -23,14 +23,6 @@ const entityApi = createApi({
                 };
             }
         }),
-        entityByTypeList: builder.query({
-            query: (type) => {
-                return {
-                    url: `/entity/query-by-type-ss/${type}`,
-                    method: 'GET'
-                };
-            }
-        }),
         newEntity: builder.mutation({
             query: (payload) => {
                 return {
@@ -61,7 +53,6 @@ const entityApi = createApi({
 export const {
     useEntityQuery,
     useEntityListQuery,
-    useEntityByTypeListQuery,
     useNewEntityMutation,
     useNewEntityBatchMutation
 } = entityApi;

@@ -69,3 +69,13 @@ spec:
                 name: get-it-made-srv
                 port: 
                   number: 3000
+    - host: pega.get-it.solutions
+      http:
+        paths:
+          - path: /?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: get-it-pega-srv
+                port: 
+                  number: 3000

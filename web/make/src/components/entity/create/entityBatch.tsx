@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom'
 import { useForm, SubmitHandler  } from "react-hook-form";
-import { useNewEntityBatchMutation, useGenAIJsonPMutation } from "../../../store";
+import { useNewEntityBatchMutation, useGenAIBatchJsonPMutation } from "../../../store";
 import { TextArea, TextInput } from "../../ui";
 import { FaClipboardList, FaPlus, FaStar } from "react-icons/fa";
 
@@ -14,19 +14,32 @@ type IFormEntityInput = {
     status: String
 }
 
+interface EntityI {
+    type: String
+    description: String
+    values: {}
+    status: String
+}
+
 const CreateEntityBatch = () => {
     let navigate = useNavigate();
 
-    const { register, getValues, formState: { errors }, handleSubmit, setValue } = useForm<IFormEntityInput>();
+    const { register, getValues, formState: { errors }, handleSubmit, setValue } = useForm<IFormEntityInput>(
+        {
+            defaultValues: {
+                status: 'New-CreatedInGetIT'
+            }
+        }
+    );
     const [
         createEntityBatch, // This is the mutation trigger
         { isLoading }, // This is the destructured mutation result
     ] = useNewEntityBatchMutation()
 
     const [
-        createAISuggestion, // This is the mutation trigger
+        createAISuggestions, // This is the mutation trigger
         { error }, // This is the destructured mutation result
-    ] = useGenAIJsonPMutation()
+    ] = useGenAIBatchJsonPMutation()
     
     
     const loadEntityHome = () => {
@@ -48,14 +61,30 @@ const CreateEntityBatch = () => {
     };
 
     const suggestUsingAI = async () => {
-        const { type, description } = getValues();
+        const { type, count, description } = getValues();
         const payload = {
-            prompt: `create a detailed model of a ${type} with a description matching: ${description}`
+            prompt: `create ${count} instances of a ${type} with the following description: ${description}`
         };
         console.log(JSON.stringify(payload));
-        const data = await createAISuggestion(payload).unwrap();
-        console.log('returned ' + data.response);
-        setValue('values', JSON.stringify(data.response));
+        const data = await createAISuggestions(payload).unwrap();
+        const response = data.response as [];
+        console.log('returned ' + response);
+        const entities: EntityI[] = [];
+        
+        // add the type and description to each entity
+        response.map((entity: any) => {
+            const valueEntity: EntityI = {
+                type: type,
+                description: description,
+                values: entity,
+                status: 'New-CreatedByAiBatch'
+            };
+            entities.push(valueEntity);
+        })
+
+        const values = {"entities": entities}
+        console.log(JSON.stringify(values))
+        setValue('values', JSON.stringify(values));
     } 
 
     const existingSkeleton = () => {
