@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import { body } from 'express-validator';
 import { Entity } from '../models/Entity-mongoose';
 import { baseUrl } from '../config/end-points';
+import { isValidObjectId } from 'mongoose';
 
 declare const validateRequest: (req: Request, res: Response, next: NextFunction) => void;
 const router = express.Router();
@@ -19,15 +20,13 @@ router.put(
         let { id, type, description, values, status } = req.body;
         
         // if we find an existing entity, update it
-        if (id && id != 'New') {
-            const existingEntity = await Entity.findById(id);
-
-            console.log(JSON.stringify(existingEntity));
-            if (existingEntity) {
-                existingEntity.values = values;
-                existingEntity.save();
-                res.status(202).send(existingEntity);
-            }
+        if (id && isValidObjectId(id)) {
+            const existingEntity = await Entity.findOneAndUpdate(
+                { id },
+                { values }
+            );
+            res.status(202).send(existingEntity);
+            return;
         }
         //otherwise create a new one
         if (!status) {
