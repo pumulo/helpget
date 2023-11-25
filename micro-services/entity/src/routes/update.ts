@@ -22,7 +22,7 @@ router.put(
         // if we find an existing entity, update it
         if (id && isValidObjectId(id)) {
             const existingEntity = await Entity.findOneAndUpdate(
-                { id },
+                { _id: id },
                 { values }
             );
             res.status(202).send(existingEntity);
