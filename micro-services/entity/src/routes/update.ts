@@ -17,17 +17,13 @@ router.put(
     ],
     // validateRequest,
     async (req: Request, res: Response) => {
-        let { id, type, description, values, status, version } = req.body;
-        version = version? 1 : version + 1;
+        let { id, type, description, values, status } = req.body;
         
         // if we find an existing entity, update it
         if (id && isValidObjectId(id)) {
             const existingEntity = await Entity.findOneAndUpdate(
                 { _id: id },
-                {
-                    values,
-                    __v : version
-                }
+                { values }
             );
             res.status(202).send(existingEntity);
             return;
