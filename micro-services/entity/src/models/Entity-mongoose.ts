@@ -55,8 +55,8 @@ const EntitySchema = new mongoose.Schema(
     }
 );
 
-EntitySchema.pre('update', function( next ) {
-    this.update({}, { $inc: { __v: 1 } }, next );
+EntitySchema.pre('findOneAndUpdate', function( next ) {
+    this.findOneAndUpdate({}, { $inc: { __v: 1 } }, next );
 });
 
 EntitySchema.statics.build = (attrs: EntityAttrs) => {
