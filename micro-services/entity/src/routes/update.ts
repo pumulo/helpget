@@ -24,7 +24,9 @@ router.put(
             const existingEntity = await Entity.findOneAndUpdate(
                 { _id: id },
                 {
-                    values,
+                    values
+                }, 
+                {
                     $inc: { __v: 1 }
                 }
             );
